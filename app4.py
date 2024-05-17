@@ -23,5 +23,4 @@ def plot4():
     plt.ylabel("Count")
     plt.legend(title="Gender")
     
-    # Show the plot
-        return plt.gcf()
+    return plt.gcf()
