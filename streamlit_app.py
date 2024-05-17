@@ -93,5 +93,23 @@ elif selected == "Contact":
 elif selected == "Graph":
     graph()
 
+# Plot the selected graph
+ for title in selected_titles:
+if title == ("Daily Steps: Trends by Age and Gender"):
+            st.write(("Daily Steps: Trends by Age and Gender"))
+            st.pyplot(plot8())
+            st.write("The plot depicts the relationship between daily steps, age, and gender. It likely stems from a health or fitness study that tracked daily steps taken by participants of different ages and genders. The data is visualized using two elements. The first element is colored lines which separate trend lines are shown for each gender, colored light blue possibly for males and salmon possibly for females. The second element is data points.")
+
+            st.code(open("app8.py").read(), language='python')
+        elif title == ("Daily Steps Distribution by Gender: A Look at the Violin Plot":
+            st.write(("Daily Steps Distribution by Gender: A Look at the Violin Plot")
+            st.pyplot(plot9())
+            st.write("This violin plot, generated using ggplot2 in R, provides insights into the distribution of daily steps taken by individuals categorized by gender in the provided dataset. First, the distribution of the violin plots suggests a possible difference in the distribution of daily steps between genders. While the medians might be visually similar, the shapes of the violins hint at potential variations. Second, the spread of wider spread of the female violin might indicate greater variability in daily steps among females compared to males. ")
+            st.code(open("app9.py").read(), language='python')
+        elif title == ("Stress Level by Occupation and Age"):
+            st.write(("Stress Level by Occupation and Age"))
+            st.pyplot(plot10())
+            st.write("Bubble charts show individuals' stress levels based on occupation and personality. The size of the bubbles indicates stress levels, while their color reflects gender. Overall, it is possible to see fluctuations in stress levels between men and women in different occupational groups. It shows that the group of people working as teachers, software engineers, lawyers, engineers, and doctors have a closer viewing distance and a wider bending angle than the other group, showing that the job requires more precision, requiring looked closer and bent more than less precise work, which caused more nervous tension and pain in the other groups.")
+            st.code(open("app10.py").read(), language='python')
 
 
