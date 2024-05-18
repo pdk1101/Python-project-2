@@ -5,6 +5,10 @@ def plot8():
   # Read the CSV file
     my_data = pd.read_csv("health.csv")
 
+def plot8():
+    # Read the CSV file
+    my_data = pd.read_csv("health.csv")
+
     # Replace spaces in column names with underscores
     my_data.columns = my_data.columns.str.replace(' ', '_')
 

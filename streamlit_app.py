@@ -31,33 +31,83 @@ def get_img_as_base64(file):
     return base64.b64encode(data).decode()
 
 img = get_img_as_base64('imgs/bg.jpg')
-img1 = get_img_as_base64('imgs/pexels-enricoperini-705425.jpg')
+img1 = get_img_as_base64('imgs/pexels-dreamypixel-547115.jpg')
+
 page_bg_img = f"""
 <style>
     .main {{
-    background-image: url("data:image/png;base64,{img1}");
-    background-size: cover;
-    background-position: center; 
-    background-arepeat: no-repeat;
-    background-attachment: relative;
+        position: relative;
+        z.index: 1;
+        background-color: #fed2ff;
+    }}
+    .main::before {{
+        content: "";
+        background-image: url("data:image/png;base64,{img1}");
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        opacity: 0.6;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 0;
     }}
     [data-testid="stSidebarContent"] {{
         background-image: url("data:image/png;base64,{img}");
         background-size: cover;
     }}
     [data-testid="stHeader"] {{
-        background-image: url("data:image/png;base64,{img1}");
-        background-size: cover;
-        background-attachment: absolute;
+        background-color: rgba(0, 0, 0, 0.0);
     }}
+    [data-testid="stMarkdownContainer"] p{{
+        color: white;
+    }}
+
+    # [data-testid="StyledLinkIconContainer"] {{
+    #     width: 100%;
+    #     height: 100%;
+    #     display: flex;
+    #     justify-content: center;
+    #     align-items: center;
+    # }}
+
+    .home-text {{
+        font-family: 'Arial', sans-serif;
+        font-size: 60px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+        margin: 0px 0px 0px 0px;
+    }}
+    .subtitle {{
+        font-family: 'Arial', sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+    }}
+    .line {{
+        font-family: 'Arial', sans-serif;
+        font-size: 50px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        padding: 0px 0px 0px 0px;
+    }}    
 </style>
 """
 
-st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Define the different pages
 def home():
-    st.title("Home Page")
+    st.markdown(page_bg_img, unsafe_allow_html=True)
+    st.markdown("<h1 class='home-text'>Sleep health & lifestyle</h1><p class='line'>____________________________</p><br><h2 class='subtitle'>Python project 2</h2>", unsafe_allow_html=True)
+
 
 def datasetPage():
     st.title("Dataset")
@@ -80,6 +130,7 @@ def graph():
         "Heatmap of Stress Level vs Sleep Disorder",
         "Count of Gender across Physical Activity Levels",
         "Distribution of BMI by Gender",
+        "Heart Rate by BMI Category",
         "Relationship between Occupation and BMI Category",
         "Daily Steps: Trends by Age and Gender",
         "Daily Steps Distribution by Gender: A Look at the Violin Plot",
@@ -118,12 +169,46 @@ def graph():
             st.pyplot(plot5())
             st.write("The bar chart presents data about the distribution of participants categorized by BMI. According to the graph, females outweigh males in the Normal Weight and Overweight categories. In contrast, the Normal category shows that men account for 131 people which is double compared to women. Finally, the Obese people also illustrate the same trend where there is only one female is obese, nine times lower than males")
             st.code(open("app5.py").read(), language='python')
+        elif title == "Heart Rate by BMI Category":
+            st.write("Heart Rate by BMI Category")
+            st.pyplot(plot6())
+            st.write("The plot shows the relationship between BMI category and heart rate. The data suggests that individuals in the obese category have the highest heart rate, followed by the overweight category. The normal weight and normal categories have similar heart rates. This bar chart provides insights into the relationship between BMI category and heart rate.")
+            st.code(open("app7.py").read(), language='python')
         elif title == "Relationship between Occupation and BMI Category":
             st.write("Relationship between Occupation and BMI Category")
-            st.pyplot(plot6())
+            st.pyplot(plot7())
             st.write("The boxplot shows the relationship between BMI category and heart rate. The data suggests that individuals in the obese category have the highest heart rate, followed by the overweight category. The normal weight and normal categories have similar heart rates. This boxplot provides insights into the relationship between BMI category and heart rate.")
             st.code(open("app6.py").read(), language='python')
-
+        elif title == "Daily Steps: Trends by Age and Gender":
+            st.write(("Daily Steps: Trends by Age and Gender"))
+            st.pyplot(plot8())
+            st.write("The plot depicts the relationship between daily steps, age, and gender. It likely stems from a health or fitness study that tracked daily steps taken by participants of different ages and genders. The data is visualized using two elements. The first element is colored lines which separate trend lines are shown for each gender, colored light blue possibly for males and salmon possibly for females. The second element is data points.")
+            st.code(open("app8.py").read(), language='python')
+        elif title == "Daily Steps Distribution by Gender: A Look at the Violin Plot":
+            st.write("Daily Steps Distribution by Gender: A Look at the Violin Plot")
+            st.pyplot(plot9())
+            st.write("This violin plot, generated using ggplot2 in R, provides insights into the distribution of daily steps taken by individuals categorized by gender in the provided dataset. First, the distribution of the violin plots suggests a possible difference in the distribution of daily steps between genders. While the medians might be visually similar, the shapes of the violins hint at potential variations. Second, the spread of wider spread of the female violin might indicate greater variability in daily steps among females compared to males. ")
+            st.code(open("app9.py").read(), language='python')
+        elif title == ("Stress Level by Occupation and Age"):
+            st.write(("Stress Level by Occupation and Age"))
+            st.pyplot(plot10())
+            st.write("Bubble charts show individuals' stress levels based on occupation and personality. The size of the bubbles indicates stress levels, while their color reflects gender. Overall, it is possible to see fluctuations in stress levels between men and women in different occupational groups. It shows that the group of people working as teachers, software engineers, lawyers, engineers, and doctors have a closer viewing distance and a wider bending angle than the other group, showing that the job requires more precision, requiring looked closer and bent more than less precise work, which caused more nervous tension and pain in the other groups.")
+            st.code(open("app10.py").read(), language='python')
+        elif title == ("Distribution of Stress Levels by Age Group"):
+            st.write(("Distribution of Stress Levels by Age Group"))
+            st.pyplot(plot11())
+            st.write("The plot shows the distribution of stress levels by age group. The data suggests that individuals in the 20-29 age group have the highest stress levels, followed by the 30-39 age group. The 40-49 age group has the lowest stress levels. This bar chart provides insights into the distribution of stress levels by age group.")
+            st.code(open("app11.py").read(), language='python')
+        elif title == ("Relationship Between Sleep Quality and Heart Rate Among Surveyed Individuals"):
+            st.write(("Relationship Between Sleep Quality and Heart Rate Among Surveyed Individuals"))
+            st.pyplot(plot12())
+            st.write("The pie chart shows the relationship between sleep quality and heart rate among surveyed individuals. The data suggests that individuals with poor sleep quality have higher heart rates than those with good sleep quality. The pie chart provides insights into the relationship between sleep quality and heart rate.")
+            st.code(open("app12.py").read(), language='python')
+        elif title == ("Distribution of Quality of Sleep"):
+            st.write(("Distribution of Quality of Sleep"))
+            st.pyplot(plot13())
+            st.write("The chart shows the distribution of quality of sleep among surveyed individuals. The data suggests that most individuals have good quality sleep, followed by fair quality sleep. The pie chart provides insights into the distribution of quality of sleep.")
+            st.code(open("app13.py").read(), language='python')
 
 def contact():
     st.title("Contact")

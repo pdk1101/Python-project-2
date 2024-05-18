@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 import pandas as pd
+
 def plot9():
     # Read the CSV file
     my_data = pd.read_csv("health.csv")
