@@ -1,19 +1,20 @@
-
-# from app import *
-
-# st.title('My first app')
-
-# st.write("Here's our first attempt at using data to create a table:")
-
-# st.pyplot(plot_sleep())
-  
 import streamlit as st
 import pandas as pd
 from streamlit_option_menu import option_menu
 from app import *
 from app2 import *
 from app3 import *
-
+from app4 import *
+from app5 import *
+from app6 import *
+from app7 import *
+from app8 import *
+from app9 import *
+from app10 import *
+from app11 import *
+from app12 import *
+from app13 import *
+import base64
 # Set the page config to wide layout
 st.set_page_config(layout="wide")
 
@@ -23,10 +24,40 @@ with st.sidebar:
         "Navigation", ["Home", "Dataset", "Graph", "Contact"],
         icons=['house', 'table', 'activity', 'envelope'], menu_icon="cast", default_index=0)
 
+@st.cache_data
+def get_img_as_base64(file):
+    with open(file, "rb") as f:
+        data = f.read()
+    return base64.b64encode(data).decode()
+
+img = get_img_as_base64('imgs/bg.jpg')
+img1 = get_img_as_base64('imgs/pexels-enricoperini-705425.jpg')
+page_bg_img = f"""
+<style>
+    .main {{
+    background-image: url("data:image/png;base64,{img1}");
+    background-size: cover;
+    background-position: center; 
+    background-arepeat: no-repeat;
+    background-attachment: relative;
+    }}
+    [data-testid="stSidebarContent"] {{
+        background-image: url("data:image/png;base64,{img}");
+        background-size: cover;
+    }}
+    [data-testid="stHeader"] {{
+        background-image: url("data:image/png;base64,{img1}");
+        background-size: cover;
+        background-attachment: absolute;
+    }}
+</style>
+"""
+
+st.markdown(page_bg_img, unsafe_allow_html=True)
+
 # Define the different pages
 def home():
-    st.title("Home")
-    st.write("Welcome to our home page!")
+    st.title("Home Page")
 
 def datasetPage():
     st.title("Dataset")
@@ -66,7 +97,6 @@ def graph():
             st.write("Relationship between Gender, Occupation, and Sleep Duration")
             st.pyplot(plot1())
             st.write("The plot illustrates the average sleep duration across different genders and occupations. Females tend to sleep slightly longer than males, with healthcare professionals having the highest average sleep durations. On average, females sleep between 7.2 to 8.5 hours, while males sleep between 5.8 to 7.4 hours. Healthcare professionals average around 7.5 hours of sleep, followed by educators and IT professionals. Interestingly, there's some variation within occupations based on gender, though less pronounced among IT professionals.")
-
             st.code(open("app.py").read(), language='python')
         elif title == "Density of Sleep Duration by Gender and Stress Level":
             st.write("Density of Sleep Duration by Gender and Stress Level")
@@ -78,6 +108,22 @@ def graph():
             st.pyplot(plot3())
             st.write("The heatmap illustrates the relationship between stress levels and sleep disorders. The data suggests that individuals with high stress levels are more likely to have sleep disorders. The most common sleep disorder among high-stress individuals is insomnia, followed by sleep apnea and restless leg syndrome. In contrast, low-stress individuals are less likely to have sleep disorders, with insomnia being the most common sleep disorder. This heatmap provides insights into the relationship between stress levels and sleep disorders.")
             st.code(open("app3.py").read(), language='python')
+        elif title == "Count of Gender across Physical Activity Levels":
+            st.write("Count of Gender across Physical Activity Levels")
+            st.pyplot(plot4())
+            st.write("This chart examines the relationship between physical activity level and heart rate, separating the data by gender. The graph illustrates that both genders have similar physical activity levels. When this level is below 60, females’ level is two points lower than males. The opposite is true when the level is above 60 when the physical activity level of women is one point higher than men. ")
+            st.code(open("app4.py").read(), language='python')
+        elif title == "Distribution of BMI by Gender":
+            st.write("Distribution of BMI by Gender")
+            st.pyplot(plot5())
+            st.write("The bar chart presents data about the distribution of participants categorized by BMI. According to the graph, females outweigh males in the Normal Weight and Overweight categories. In contrast, the Normal category shows that men account for 131 people which is double compared to women. Finally, the Obese people also illustrate the same trend where there is only one female is obese, nine times lower than males")
+            st.code(open("app5.py").read(), language='python')
+        elif title == "Relationship between Occupation and BMI Category":
+            st.write("Relationship between Occupation and BMI Category")
+            st.pyplot(plot6())
+            st.write("The boxplot shows the relationship between BMI category and heart rate. The data suggests that individuals in the obese category have the highest heart rate, followed by the overweight category. The normal weight and normal categories have similar heart rates. This boxplot provides insights into the relationship between BMI category and heart rate.")
+            st.code(open("app6.py").read(), language='python')
+
 
 def contact():
     st.title("Contact")
@@ -92,6 +138,3 @@ elif selected == "Contact":
     contact()
 elif selected == "Graph":
     graph()
-
-
-
